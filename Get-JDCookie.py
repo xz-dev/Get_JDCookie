@@ -14,12 +14,15 @@ def find_cookie(cookies):
             pt_pin = item
         if "pt_key" in item:
             pt_key = item
+    if not pt_pin or not pt_key:
+        print("cookies:", cookies)
+        print("提取失败，请手动提取pt_key和pt_pin")
+        return
     jd_cookie = pt_pin + ";" + pt_key + ";"
     pyperclip.copy(jd_cookie)  # 拷贝JDcookie到剪切板
     print("Cookie:", jd_cookie)
     print("已拷贝Cookie到剪切板、直接黏贴即可。")
     # return jd_cookie
-    os.system("pause")  # 按任意键继续
 
 
 async def main():
@@ -44,6 +47,7 @@ async def main():
         while True:
             if await elm.is_visible():
                 break
+            await asyncio.sleep(0.1)
         cookie = await context.cookies()
         # print(cookie)
         # 格式化cookie
@@ -52,6 +56,8 @@ async def main():
             cookies_temp.append("{}={}".format(i["name"], i["value"]))
         cookies = "; ".join(cookies_temp)
         find_cookie(cookies)
+        await context.close()
+        await browser.close()
         # print("cookies:{}".format(await page.cookies()))
 
 

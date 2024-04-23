@@ -4,8 +4,9 @@
 ## 主要功能
 
 - 登陆京东获取cookie
-  - 下载release版本
-  - 运行Get-JDCookie.exe
-  - 登录（推荐使用手机验证码登录）
+  - python3 -m venv .venv
+  - . ./.venv/Script/activate Or . ./.venv/bin/activate
+  - pip install -r requirements.txt
+  - playwright install chromium
+  - ./Get-JDCookie.py
   - Cookie自动复制到剪切板（也可以在命令行输出里面查看cookie）
-  - 回车关闭程序
